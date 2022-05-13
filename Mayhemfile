@@ -1,0 +1,6 @@
+project: rnshah9/mayhem-lemon
+target: lemon
+
+cmds:
+  - cmd: /repo/lemon @@
+    filepath: /test.lm
