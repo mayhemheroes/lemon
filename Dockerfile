@@ -14,4 +14,5 @@ FROM ubuntu:20.04 as package
 
 COPY --from=builder /deps /deps
 COPY --from=builder /repo/lemon /repo/lemon
+COPY --from=builder /repo/liblemon.so /deps
 ENV LD_LIBRARY_PATH=/deps
