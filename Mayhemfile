@@ -1,6 +1,6 @@
-project: rnshah9/mayhem-lemon
+project: lemon
 target: lemon
 
 cmds:
-  - cmd: /repo/lemon @@
+  - cmd: /repo/lemon /test.lm
     filepath: /test.lm
