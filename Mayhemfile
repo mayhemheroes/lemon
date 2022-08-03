@@ -2,5 +2,4 @@ project: lemon
 target: lemon
 
 cmds:
-  - cmd: /repo/lemon /test.lm
-    filepath: /test.lm
+  - cmd: /lemon @@
