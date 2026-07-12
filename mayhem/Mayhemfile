@@ -1,0 +1,22 @@
+project: lemon
+target: lemon
+
+# Two-entry seed directive per docs/seed-corpus.md: server-accumulated corpus tar + git-tracked
+# seeds. (mayhem-lint: keep-testsuite)
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/lemon/testsuite
+
+# File-input target (`@@` = fuzzed .lm script): the libFuzzer harness (mayhem/fuzz_compile.c, the
+# compiler front-end — no bytecode execution) linked against LLVM's run-once
+# StandaloneFuzzTargetMain, built with -fsanitize=fuzzer-no-link so SanitizerCoverage edge counters
+# are present and Mayhem records coverage. lemon has real, shallow front-end crashes (NULL-deref
+# compiling `var ;`, src/compiler.c:1009); with a per-input process those are reported as defects
+# while the run stays healthy, whereas the in-process libFuzzer loop dies at Mayhem's
+# regression-sanity phase once one lands in the accumulated corpus. Same pattern as the integrated
+# `ichbins` compiler. Timeout raised from the 2 s default: deeply nested inputs drive the recursive
+# parser near its stack limit under ASan, inflating past 2 s under Mayhem's syscall-tracing
+# smoketest.
+cmds:
+  - cmd: /mayhem/lemon_fuzz-standalone @@
+    timeout: 30

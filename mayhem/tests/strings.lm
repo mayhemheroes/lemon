@@ -1,0 +1,5 @@
+var s = 'abc' + 'def';
+print(s);
+print('Hello', 'World');
+var t = 'x' + 'y' + 'z';
+print(t);
