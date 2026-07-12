@@ -1,0 +1,5 @@
+project: lemon
+target: lemon
+
+cmds:
+  - cmd: /lemon @@
